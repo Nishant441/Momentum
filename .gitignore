@@ -1,0 +1,34 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Dependency directories
+node_modules/
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Build outputs
+dist/
+build/
+.next/
+.vite/
+
+# Database
+*.db
+*.sqlite

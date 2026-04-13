@@ -18,7 +18,7 @@ export function VictoryScreen({ taskCount, onStartOver }: VictoryScreenProps) {
           </p>
         </div>
 
-        {/* Stats row */}
+        {}
         <div className="w-full rounded-2xl border border-success-text/20 bg-success-bg px-6 py-4">
           <p className="font-display font-bold text-success-text text-2xl">{taskCount} of {taskCount} complete</p>
           <p className="text-sm text-text-secondary mt-0.5">No procrastinating today.</p>

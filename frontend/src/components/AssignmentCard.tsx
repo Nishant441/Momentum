@@ -68,7 +68,7 @@ export function AssignmentCard({ assignment, onOpen, onDelete }: AssignmentCardP
       }`}
       onClick={() => !isDone && onOpen(assignment.id)}
     >
-      {/* Top row: title + deadline badge */}
+      {}
       <div className="flex items-start justify-between gap-3">
         <h3
           className={`font-display font-bold text-xl leading-snug ${
@@ -94,7 +94,7 @@ export function AssignmentCard({ assignment, onOpen, onDelete }: AssignmentCardP
         </div>
       </div>
 
-      {/* Progress bar */}
+      {}
       <div className="flex flex-col gap-1.5">
         <div className="h-1.5 w-full rounded-full bg-raised overflow-hidden">
           <div
@@ -113,7 +113,7 @@ export function AssignmentCard({ assignment, onOpen, onDelete }: AssignmentCardP
         </div>
       </div>
 
-      {/* CTA */}
+      {}
       {!isDone && (
         <div className="flex items-center justify-between">
           <span className="text-xs text-text-secondary">

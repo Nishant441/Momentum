@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Fonts ────────────────────────────────────────────────────────────── */
+
   --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
 
-  /* ── Core neutrals ───────────────────────────────────────────────────── */
+
   --color-app-bg: #F3F0EB;
   --color-card-bg: #FBF8F3;
   --color-raised: #F1ECE5;
@@ -14,30 +14,30 @@
   --color-border-strong: #C4BDB3;
   --color-divider: #E9E3DA;
 
-  /* ── Text ────────────────────────────────────────────────────────────── */
+
   --color-text-primary: #2F3738;
   --color-text-secondary: #7C7A73;
   --color-text-muted: #A19C93;
   --color-text-inverse: #F8F5EF;
 
-  /* ── Primary action ──────────────────────────────────────────────────── */
+
   --color-action: #3F596E;
   --color-action-hover: #364D60;
   --color-action-pressed: #2E4252;
 
-  /* ── Sage accents ────────────────────────────────────────────────────── */
+
   --color-sage-strong: #8EA08B;
   --color-sage: #A5B4A0;
   --color-sage-soft: #CDD8C8;
   --color-sage-pale: #E8EFE5;
 
-  /* ── Warm gold / sand accents ────────────────────────────────────────── */
+
   --color-gold-strong: #B59A66;
   --color-gold: #C9B286;
   --color-gold-soft: #E5D7BD;
   --color-gold-pale: #F3EBDD;
 
-  /* ── Semantic colors ─────────────────────────────────────────────────── */
+
   --color-danger-text: #A8665D;
   --color-danger-bg: #F4E2DD;
   --color-warning-text: #A78C53;
@@ -45,7 +45,7 @@
   --color-success-text: #6E8A70;
   --color-success-bg: #E4EEE4;
 
-  /* ── Garden / progress board ─────────────────────────────────────────── */
+
   --color-parchment-1: #EFE6D8;
   --color-parchment-2: #E6D8C7;
   --color-parchment-3: #D8C6B2;

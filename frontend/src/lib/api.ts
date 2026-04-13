@@ -1,18 +1,18 @@
 import type { Task } from '../components/TaskCard'
 
-// ── Assignment type ──────────────────────────────────────────────────────────
+
 
 export interface Assignment {
   id: string
-  title: string          // AI-generated title for the assignment
-  rawInput: string       // what the user typed
-  deadline: string | null // "YYYY-MM-DD" or null
+  title: string
+  rawInput: string
+  deadline: string | null
   tasks: Task[]
   completedIds: number[]
-  createdAt: string      // ISO timestamp
+  createdAt: string
 }
 
-// ── Prompt ───────────────────────────────────────────────────────────────────
+
 
 const SYSTEM_PROMPT = `You are an academic task breakdown assistant.
 Given an assignment, break it into micro-tasks a student can do one at a time.
@@ -36,7 +36,7 @@ Also return a riskScore (0–100) for each task based on:
 Respond ONLY with raw JSON. No markdown. No explanation.
 Schema: {"title":"...","tasks":[{"id":1,"title":"...","description":"...","estimatedMinutes":10,"order":1,"riskScore":85}]}`
 
-// ── API call ─────────────────────────────────────────────────────────────────
+
 
 export async function breakDownAssignment(
   userInput: string,
@@ -66,11 +66,11 @@ export async function breakDownAssignment(
   const data = await response.json()
   const raw: string = data.choices?.[0]?.message?.content ?? ''
 
-  // Strip any accidental markdown fences
+
   const cleaned = raw.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '').trim()
   const parsed = JSON.parse(cleaned) as { title: string; tasks: Task[] }
 
-  // Clamp values to valid ranges
+
   const tasks = parsed.tasks.map((t) => ({
     ...t,
     estimatedMinutes: Math.min(t.estimatedMinutes, 30),
@@ -80,7 +80,7 @@ export async function breakDownAssignment(
   return { title: parsed.title, tasks }
 }
 
-// ── localStorage helpers ──────────────────────────────────────────────────────
+
 
 const ASSIGNMENTS_KEY = 'momentum_assignments'
 

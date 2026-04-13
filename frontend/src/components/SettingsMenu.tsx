@@ -18,7 +18,7 @@ export function SettingsMenu({
   const [open, setOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
-  // Close on click outside
+
   useEffect(() => {
     if (!open) return
     const handler = (e: MouseEvent) => {
@@ -49,7 +49,7 @@ export function SettingsMenu({
             <p className="text-xs text-text-muted font-medium uppercase tracking-wide">Settings</p>
           </div>
 
-          {/* Notifications toggle */}
+          {}
           <button
             onClick={() => {
               if (notifAvailable) onToggleNotifications()
@@ -61,7 +61,7 @@ export function SettingsMenu({
             <Toggle on={settings.notificationsEnabled && notifAvailable} />
           </button>
 
-          {/* Sound toggle */}
+          {}
           <button
             onClick={() => {
               if (notifAvailable && settings.notificationsEnabled) onToggleSound()
@@ -73,7 +73,7 @@ export function SettingsMenu({
             <Toggle on={settings.soundEnabled && notifAvailable && settings.notificationsEnabled} />
           </button>
 
-          {/* State hint */}
+          {}
           {!notifAvailable && (
             <p className="px-3 pt-1 pb-2 text-xs text-text-muted leading-snug">
               {notifPermission === 'denied'

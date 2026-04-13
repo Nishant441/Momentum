@@ -6,12 +6,12 @@ export type BadgeId = 'first_win' | 'streak_master' | 'sprint_champion'
 
 interface StreakData {
   currentStreak: number
-  lastActiveDate: string   // "YYYY-MM-DD"
+  lastActiveDate: string
   totalTasksCompleted: number
   totalFocusMinutes: number
   badges: BadgeId[]
   sprintsToday: number
-  sprintsDate: string      // "YYYY-MM-DD" — resets sprintsToday counter
+  sprintsDate: string
 }
 
 const KEY = 'momentum_streak'
@@ -52,7 +52,7 @@ function persist(data: StreakData): void {
   localStorage.setItem(KEY, JSON.stringify(data))
 }
 
-/** Reset streak to 0 if last active date is neither today nor yesterday. */
+
 function applyStreakDecay(data: StreakData): StreakData {
   const t = todayStr()
   const y = yesterdayStr()
@@ -67,7 +67,7 @@ function withBadge(data: StreakData, badge: BadgeId): StreakData {
   return { ...data, badges: [...data.badges, badge] }
 }
 
-// ── Hook ────────────────────────────────────────────────────────────────────
+
 
 export function useStreak(token?: string) {
   const [data, setData] = useState<StreakData>(() => {
@@ -76,7 +76,7 @@ export function useStreak(token?: string) {
     return loaded
   })
 
-  // On mount with token: fetch from server and override local state
+
   useEffect(() => {
     if (!token) return
     fetchStreak(token)
@@ -87,7 +87,7 @@ export function useStreak(token?: string) {
         setData(decayed)
         persist(decayed)
       })
-      .catch(() => {}) // fall back to localStorage on network error
+      .catch(() => {})
   }, [token])
 
   const update = useCallback(
@@ -95,7 +95,7 @@ export function useStreak(token?: string) {
       setData((prev) => {
         const next = fn(prev)
         persist(next)
-        // Fire-and-forget server sync
+
         if (token) {
           syncStreak(token, next as StreakPayload).catch(() => {})
         }
@@ -105,7 +105,7 @@ export function useStreak(token?: string) {
     [token],
   )
 
-  /** Call when a task is marked complete (Mark Complete & Continue). */
+
   const recordTaskComplete = useCallback(() => {
     update((prev) => {
       let next = { ...prev }
@@ -125,7 +125,7 @@ export function useStreak(token?: string) {
     })
   }, [update])
 
-  /** Call when the countdown timer hits 00:00. */
+
   const addFocusMinutes = useCallback(
     (minutes: number) => {
       update((prev) => {
@@ -147,8 +147,8 @@ export function useStreak(token?: string) {
     [update],
   )
 
-  // Derive first_win from totalTasksCompleted so it disappears after a
-  // localStorage clear rather than being restored from the server's badges array.
+
+
   const badges: BadgeId[] = [
     ...(data.totalTasksCompleted > 0 ? (['first_win'] as BadgeId[]) : []),
     ...data.badges.filter((b) => b !== 'first_win'),

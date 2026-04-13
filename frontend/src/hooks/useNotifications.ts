@@ -3,7 +3,7 @@ import { isSupported, requestPermission, sendNotification } from '../lib/notific
 import type { Assignment } from '../lib/api'
 import type { Sprinter } from './useRoom'
 
-// ── Types ─────────────────────────────────────────────────────────────────────
+
 
 export type NotifPermission = 'pending' | 'granted' | 'denied'
 
@@ -20,7 +20,7 @@ const DEFAULT_SETTINGS: NotificationSettings = {
 const PERM_KEY = 'momentum_notif_permission'
 const SETTINGS_KEY = 'momentum_settings'
 
-// ── Hook ──────────────────────────────────────────────────────────────────────
+
 
 export function useNotifications() {
   const [permissionState, setPermissionState] = useState<NotifPermission>(() => {
@@ -37,18 +37,18 @@ export function useNotifications() {
     }
   })
 
-  // Persist settings on change
+
   useEffect(() => {
     localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings))
   }, [settings])
 
-  // Scheduling deduplication — refs so scheduleNotifications stays stable
+
   const sentType1Ids = useRef(new Set<string>())
   const scheduledType2Ids = useRef(new Set<string>())
   const sprintNudgeScheduled = useRef(false)
   const timeoutIds = useRef<ReturnType<typeof setTimeout>[]>([])
 
-  // Ref-based canSend so scheduleNotifications doesn't need to be recreated when settings change
+
   const canSendRef = useRef(false)
   canSendRef.current =
     settings.notificationsEnabled &&
@@ -56,7 +56,7 @@ export function useNotifications() {
     isSupported() &&
     Notification.permission === 'granted'
 
-  // ── Actions ───────────────────────────────────────────────────────────────
+
 
   const handleEnableNotifications = useCallback(async () => {
     const granted = await requestPermission()
@@ -81,16 +81,16 @@ export function useNotifications() {
     setSettings((prev) => ({ ...prev, soundEnabled: !prev.soundEnabled }))
   }, [])
 
-  // ── Scheduling ────────────────────────────────────────────────────────────
 
-  // Stable function — reads canSend via ref, no deps that change between renders
+
+
   const scheduleNotifications = useCallback(
     (assignments: Assignment[], sprinters: Sprinter[]) => {
       if (!canSendRef.current) return
 
       const now = new Date()
 
-      // Type 1 — immediate deadline check (deduplicated per session via sentType1Ids)
+
       for (const a of assignments) {
         if (sentType1Ids.current.has(a.id)) continue
         if (!a.deadline) continue
@@ -109,7 +109,7 @@ export function useNotifications() {
         }
       }
 
-      // Type 2 — untouched high-risk, fire after 30 min in session
+
       for (const a of assignments) {
         if (scheduledType2Ids.current.has(a.id)) continue
         if (a.completedIds.length > 0 || a.tasks.length === 0) continue
@@ -131,7 +131,7 @@ export function useNotifications() {
         timeoutIds.current.push(id)
       }
 
-      // Type 3 — social sprint nudge, fire 5 min after detecting 3+ sprinters
+
       if (sprinters.length >= 3 && !sprintNudgeScheduled.current) {
         sprintNudgeScheduled.current = true
         const count = sprinters.length
@@ -141,15 +141,15 @@ export function useNotifications() {
             `${count} students are sprinting right now`,
             'Join them for a focus session.',
           )
-          sprintNudgeScheduled.current = false // allow re-trigger next time
+          sprintNudgeScheduled.current = false
         }, 1000 * 60 * 5)
         timeoutIds.current.push(id)
       }
     },
-    [], // stable — all live state read via refs
+    [],
   )
 
-  // Clear pending timeouts on unmount
+
   useEffect(() => {
     return () => {
       timeoutIds.current.forEach(clearTimeout)

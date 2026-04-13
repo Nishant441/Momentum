@@ -61,7 +61,7 @@ export function FileUpload({ apiKey, onExtracted, onClear }: FileUploadProps) {
     setFileName(null)
     setError(null)
     onClear()
-    // Reset file inputs so the same file can be re-selected
+
     if (pdfInputRef.current) pdfInputRef.current.value = ''
     if (imageInputRef.current) imageInputRef.current.value = ''
   }
@@ -79,13 +79,13 @@ export function FileUpload({ apiKey, onExtracted, onClear }: FileUploadProps) {
   }
 
   const handleDragLeave = (e: React.DragEvent) => {
-    // Only clear if leaving the drop zone entirely (not entering a child)
+
     if (!e.currentTarget.contains(e.relatedTarget as Node)) {
       setIsDragOver(false)
     }
   }
 
-  // ── Extracted state: just show the chip ─────────────────────────────────
+
   if (extractState === 'extracted' && fileName) {
     return (
       <div className="flex items-center gap-2 rounded-xl border border-success-text/25 bg-success-bg px-3 py-2">
@@ -102,7 +102,7 @@ export function FileUpload({ apiKey, onExtracted, onClear }: FileUploadProps) {
     )
   }
 
-  // ── Uploading state: show progress indicator ─────────────────────────────
+
   if (extractState === 'uploading' && fileName) {
     return (
       <div className="rounded-xl border border-border bg-raised px-4 py-3 flex items-center gap-3">
@@ -114,7 +114,7 @@ export function FileUpload({ apiKey, onExtracted, onClear }: FileUploadProps) {
     )
   }
 
-  // ── Idle / error state: show upload buttons and drop zone ─────────────────
+
   return (
     <div
       onDrop={handleDrop}
@@ -126,7 +126,7 @@ export function FileUpload({ apiKey, onExtracted, onClear }: FileUploadProps) {
           : 'border-border bg-raised'
       } px-4 py-4 flex flex-col gap-3`}
     >
-      {/* Buttons row */}
+      {}
       <div className="flex gap-2">
         <button
           type="button"
@@ -145,20 +145,20 @@ export function FileUpload({ apiKey, onExtracted, onClear }: FileUploadProps) {
           Upload Image
         </button>
 
-        {/* Drag hint */}
+        {}
         <span className="flex-1 flex items-center justify-center text-xs text-text-muted">
           {isDragOver ? 'Drop it!' : 'or drag & drop a file'}
         </span>
       </div>
 
-      {/* Error message */}
+      {}
       {extractState === 'error' && error && (
         <p className="text-xs text-danger-text rounded-xl border border-danger-text/20 bg-danger-bg px-3 py-2">
           {error}
         </p>
       )}
 
-      {/* Hidden file inputs */}
+      {}
       <input
         ref={pdfInputRef}
         type="file"

@@ -1,4 +1,4 @@
-// ── File validation ───────────────────────────────────────────────────────────
+
 
 export const ALLOWED_TYPES = [
   'application/pdf',
@@ -22,10 +22,10 @@ export function validateFile(file: File): string | null {
   return null
 }
 
-// ── PDF extraction (client-side, no backend) ──────────────────────────────────
+
 
 export async function extractPdfText(file: File): Promise<string> {
-  // Lazy-load pdfjs-dist so it's code-split and only downloaded when needed
+
   const pdfjsLib = await import('pdfjs-dist')
   pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -39,14 +39,14 @@ export async function extractPdfText(file: File): Promise<string> {
   for (let i = 1; i <= pdf.numPages; i++) {
     const page = await pdf.getPage(i)
     const content = await page.getTextContent()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     text += content.items.map((item: any) => item.str as string).join(' ') + '\n'
   }
 
   return text.trim()
 }
 
-// ── Image extraction (via Claude vision API) ──────────────────────────────────
+
 
 const CLAUDE_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
 

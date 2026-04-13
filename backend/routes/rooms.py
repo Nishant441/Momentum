@@ -5,13 +5,13 @@ from typing import Any
 class ConnectionManager:
     def __init__(self) -> None:
         self._sockets: list[WebSocket] = []
-        self._sprinters: dict[str, dict[str, Any]] = {}  # sprinter_id → data
-        self._ws_to_id: dict[int, str] = {}  # id(ws) → sprinter_id
+        self._sprinters: dict[str, dict[str, Any]] = {}
+        self._ws_to_id: dict[int, str] = {}
 
     async def connect(self, ws: WebSocket) -> None:
         await ws.accept()
         self._sockets.append(ws)
-        # Send the current room state to the newly connected client only
+
         await ws.send_json({
             "event": "room_update",
             "sprinters": list(self._sprinters.values()),

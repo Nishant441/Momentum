@@ -20,7 +20,7 @@ interface FocusModeProps {
   totalTasks: number
   onBack: () => void
   onComplete: (taskId: number) => void
-  onTimerComplete: () => void   // fired when countdown reaches 00:00
+  onTimerComplete: () => void
   room: RoomProps
 }
 
@@ -41,12 +41,12 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
 
   const risk = riskTier(task.riskScore)
 
-  // Keep ref in sync so room tick broadcast uses live value
+
   useEffect(() => {
     secondsRef.current = secondsLeft
   }, [secondsLeft])
 
-  // Countdown tick — anchored to real clock time so it stays accurate across tab switches
+
   useEffect(() => {
     if (timerState !== 'running') return
     const interval = setInterval(() => {
@@ -55,7 +55,7 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
     return () => clearInterval(interval)
   }, [timerState])
 
-  // Detect hitting 0 → transition to done + record focus time
+
   useEffect(() => {
     if (timerState === 'running' && secondsLeft === 0) {
       setTimerState('done')
@@ -63,16 +63,16 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
     }
   }, [timerState, secondsLeft])
 
-  // Broadcast tick to room every 10 seconds while running
+
   useEffect(() => {
     if (timerState !== 'running') return
     const tick = setInterval(() => {
       room.tickUpdate(Math.ceil(secondsRef.current / 60))
     }, 10_000)
     return () => clearInterval(tick)
-  }, [timerState, room.tickUpdate]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [timerState, room.tickUpdate])
 
-  // ── Actions ───────────────────────────────────────────────────────────
+
 
   const startTimer = () => {
     const mins = task.estimatedMinutes
@@ -102,7 +102,7 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
     endTimeRef.current = Date.now() + mins * 60 * 1000
     setSecondsLeft(mins * 60)
     setTimerState('running')
-    room.joinSprint(task, mins) // refresh minutesLeft in room
+    room.joinSprint(task, mins)
   }
 
   const handleBack = () => {
@@ -123,7 +123,7 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-app-bg px-6 overflow-y-auto">
-      {/* Back — hidden while timer is running */}
+      {}
       {timerState !== 'running' && (
         <button
           onClick={handleBack}
@@ -135,12 +135,12 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
       )}
 
       <div className="w-full max-w-lg flex flex-col gap-6 py-16">
-        {/* Step counter */}
+        {}
         <p className="text-sm text-text-muted font-medium tracking-wide uppercase">
           Step {task.order} of {totalTasks}
         </p>
 
-        {/* Title + risk */}
+        {}
         <div>
           <h1 className="font-display font-bold text-4xl text-text-primary leading-snug">
             {task.title}
@@ -151,7 +151,7 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
           </span>
         </div>
 
-        {/* ── IDLE STATE ── */}
+        {}
         {timerState === 'idle' && (
           <>
             <p className="text-text-secondary text-base leading-relaxed border-l-2 border-border pl-4">
@@ -174,7 +174,7 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
           </>
         )}
 
-        {/* ── RUNNING / PAUSED STATE ── */}
+        {}
         {(timerState === 'running' || timerState === 'paused') && (
           <>
             <div className="text-center py-4">
@@ -212,12 +212,12 @@ export function FocusMode({ task, totalTasks, onBack, onComplete, onTimerComplet
               </button>
             </div>
 
-            {/* Live accountability panel — only during active sprint */}
+            {}
             <LivePanel sprinters={room.sprinters} connected={room.connected} />
           </>
         )}
 
-        {/* ── DONE STATE ── */}
+        {}
         {timerState === 'done' && (
           <>
             <div className="text-center py-2">

@@ -10,7 +10,7 @@ export interface Sprinter {
 
 const WS_URL = import.meta.env.VITE_WS_URL ?? 'ws://127.0.0.1:8000/ws/room'
 
-// ── Persistent guest identity ──────────────────────────────────────────────
+
 
 const ADJECTIVES = ['Focused', 'Sharp', 'Driven', 'Swift', 'Bold', 'Calm', 'Eager', 'Bright']
 const ANIMALS = ['Eagle', 'Fox', 'Wolf', 'Hawk', 'Bear', 'Owl', 'Lion', 'Lynx']
@@ -36,7 +36,7 @@ function getSprinterId(): string {
   return id
 }
 
-// ── Hook ───────────────────────────────────────────────────────────────────
+
 
 export function useRoom() {
   const [sprinters, setSprinters] = useState<Sprinter[]>([])
@@ -66,20 +66,20 @@ export function useRoom() {
       socket.onopen = () => {
         console.log('✅ WebSocket successfully connected.')
         setConnected(true)
-        reconnectDelay.current = 1000 // reset backoff on success
+        reconnectDelay.current = 1000
       }
 
       socket.onmessage = (e: MessageEvent) => {
         try {
           const msg = JSON.parse(e.data as string)
           if (msg.event === 'room_update') {
-            // Exclude self from the displayed list
+
             setSprinters(
               (msg.sprinters as Sprinter[]).filter((s) => s.id !== sprinterId.current)
             )
           }
         } catch {
-          // ignore malformed messages
+
         }
       }
 
@@ -97,9 +97,9 @@ export function useRoom() {
         socket.close()
       }
     } catch {
-      // Backend not running — silently degrade
+
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     shouldReconnect.current = true
@@ -111,7 +111,7 @@ export function useRoom() {
     }
   }, [connect])
 
-  // ── Public API ─────────────────────────────────────────────────────────
+
 
   const joinSprint = useCallback((task: Task, minutesLeft: number) => {
     send({
@@ -132,7 +132,7 @@ export function useRoom() {
   }, [send])
 
   return {
-    sprinters,         // other users only (self filtered out)
+    sprinters,
     connected,
     guestName: guestName.current,
     joinSprint,

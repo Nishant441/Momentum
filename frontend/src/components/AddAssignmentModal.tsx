@@ -29,7 +29,7 @@ export function AddAssignmentModal({ apiKey, onCreated, onClose, onNeedApiKey }:
     try {
       const { title, tasks } = await breakDownAssignment(input.trim(), apiKey)
 
-      // Apply deadline proximity multiplier to risk scores
+
       const scaledTasks = tasks.map((t) => {
         let multiplier = 1
         if (deadline) {
@@ -73,7 +73,7 @@ export function AddAssignmentModal({ apiKey, onCreated, onClose, onNeedApiKey }:
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       <div className="w-full max-w-lg rounded-2xl border border-border bg-card-bg p-6 flex flex-col gap-5 shadow-sm">
-        {/* Header */}
+        {}
         <div className="flex items-center justify-between">
           <h2 className="font-display font-bold text-2xl text-text-primary">Add Assignment</h2>
           <button
@@ -84,7 +84,7 @@ export function AddAssignmentModal({ apiKey, onCreated, onClose, onNeedApiKey }:
           </button>
         </div>
 
-        {/* Assignment text */}
+        {}
         <div className="flex flex-col gap-1.5">
           <label className="text-xs text-text-secondary font-medium uppercase tracking-wide">
             What's the assignment?

@@ -14,7 +14,7 @@ interface ChaosStyle {
   delay: string
 }
 
-// Organic parchment and growth color palettes for the garden board
+
 const INACTIVE_COLORS = [
   'var(--color-parchment-1)',
   'var(--color-parchment-2)',
@@ -37,7 +37,7 @@ export function VisualWorld({ totalTasks, completedCount }: VisualWorldProps) {
 
   const allDone = totalTasks > 0 && completedCount >= totalTasks
 
-  // Stable chaos values computed once on mount — never change on re-render
+
   const chaos: ChaosStyle[] = useMemo(
     () =>
       Array.from({ length: TOTAL_BLOCKS }, () => ({
@@ -49,7 +49,7 @@ export function VisualWorld({ totalTasks, completedCount }: VisualWorldProps) {
     []
   )
 
-  // Stable color indices for organic variation
+
   const colorIndices = useMemo(
     () => Array.from({ length: TOTAL_BLOCKS }, () => Math.floor(Math.random() * 4)),
     []
@@ -57,7 +57,7 @@ export function VisualWorld({ totalTasks, completedCount }: VisualWorldProps) {
 
   return (
     <div className="w-full rounded-2xl border border-border bg-card-bg p-4 flex flex-col gap-3">
-      {/* Block grid */}
+      {}
       <div className="grid grid-cols-10 gap-1.5 w-full">
         {Array.from({ length: TOTAL_BLOCKS }, (_, i) => {
           const isGreen = i < greenCount
@@ -85,7 +85,7 @@ export function VisualWorld({ totalTasks, completedCount }: VisualWorldProps) {
         })}
       </div>
 
-      {/* Progress label */}
+      {}
       <div className="flex items-center justify-between">
         <p className="text-xs text-text-secondary">
           {completedCount} of {totalTasks} task{totalTasks !== 1 ? 's' : ''} complete

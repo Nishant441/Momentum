@@ -11,7 +11,7 @@ from db import init_db
 
 app = FastAPI(title="Momentum API")
 
-# Create tables on startup
+
 init_db()
 
 ALLOWED_ORIGINS = [
@@ -23,7 +23,7 @@ ALLOWED_ORIGINS = [
     "http://127.0.0.1:5175",
     "http://localhost:4173",
 ]
-# Add production frontend URL if set
+
 frontend_url = os.getenv("FRONTEND_URL")
 if frontend_url:
     ALLOWED_ORIGINS.append(frontend_url)

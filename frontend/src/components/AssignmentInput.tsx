@@ -20,7 +20,7 @@ export function AssignmentInput({ onSubmit, isLoading, apiKey = '' }: Assignment
 
   return (
     <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-      {/* File upload — drag & drop + buttons, populates textarea on extraction */}
+      {}
       <FileUpload
         apiKey={apiKey}
         onExtracted={(text) => setValue(text)}

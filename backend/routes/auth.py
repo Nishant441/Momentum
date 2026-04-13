@@ -19,7 +19,7 @@ TOKEN_TTL_DAYS = 30
 pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
 bearer = HTTPBearer()
 
-# ── Pydantic schemas ──────────────────────────────────────────────────────────
+
 
 class RegisterRequest(BaseModel):
     email: EmailStr
@@ -33,7 +33,7 @@ class TokenResponse(BaseModel):
     token: str
     user: dict
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+
 
 def _make_token(user_id: str) -> str:
     expire = datetime.now(timezone.utc) + timedelta(days=TOKEN_TTL_DAYS)
@@ -62,7 +62,7 @@ def get_current_user(
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
     return user
 
-# ── Routes ────────────────────────────────────────────────────────────────────
+
 
 @router.post("/register", response_model=TokenResponse, status_code=201)
 def register(body: RegisterRequest, db: Session = Depends(get_db)):
@@ -77,9 +77,9 @@ def register(body: RegisterRequest, db: Session = Depends(get_db)):
         hashed_password=pwd_ctx.hash(body.password),
     )
     db.add(user)
-    db.flush()  # get user.id before committing
+    db.flush()
 
-    # Create empty data row for this user
+
     db.add(UserData(user_id=user.id, assignments=[], streak={}))
     db.commit()
     db.refresh(user)

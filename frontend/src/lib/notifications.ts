@@ -13,6 +13,6 @@ export const sendNotification = (title: string, body: string): void => {
     body,
     icon: '/favicon.ico',
     badge: '/favicon.ico',
-    tag: title, // deduplicates notifications with the same title
+    tag: title,
   })
 }

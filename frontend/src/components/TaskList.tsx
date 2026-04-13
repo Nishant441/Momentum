@@ -39,7 +39,7 @@ export function TaskList({ tasks, completedIds, onStartOver, onFocusTask }: Task
 
   return (
     <div className="w-full flex flex-col gap-4">
-      {/* Overall risk banner */}
+      {}
       <div className={`rounded-2xl border px-5 py-4 flex items-start gap-4 ${bannerStyle}`}>
         <span className={`h-2 w-2 rounded-full flex-shrink-0 mt-1.5 ${risk.dot}`} />
         <div className="flex-1">
@@ -50,7 +50,7 @@ export function TaskList({ tasks, completedIds, onStartOver, onFocusTask }: Task
         </div>
       </div>
 
-      {/* Summary bar */}
+      {}
       <div className="flex items-center justify-between rounded-2xl border border-border bg-card-bg px-5 py-3">
         <div className="flex items-center gap-3">
           <span className="font-display font-bold text-text-primary text-lg">
@@ -69,7 +69,7 @@ export function TaskList({ tasks, completedIds, onStartOver, onFocusTask }: Task
         )}
       </div>
 
-      {/* Task cards — incomplete first, completed at bottom */}
+      {}
       <div className="flex flex-col gap-2">
         {tasks.map((task) => {
           const completed = completedIds.includes(task.id)
@@ -85,7 +85,7 @@ export function TaskList({ tasks, completedIds, onStartOver, onFocusTask }: Task
         })}
       </div>
 
-      {/* Back to dashboard */}
+      {}
       <button
         onClick={onStartOver}
         className="mt-2 w-full rounded-2xl border border-border bg-transparent py-3 text-sm text-text-secondary transition-all hover:border-border-strong hover:text-text-primary"

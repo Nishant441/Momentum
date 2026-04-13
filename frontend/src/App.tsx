@@ -10,7 +10,7 @@ function App() {
   const { token, user, authError, authLoading, login, register, logout } = useAuth()
   const [authPage, setAuthPage] = useState<AuthPage>('login')
 
-  // Not authenticated — show login or register
+
   if (!token) {
     if (authPage === 'register') {
       return (

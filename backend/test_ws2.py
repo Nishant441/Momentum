@@ -3,7 +3,7 @@ import websockets
 
 async def test():
     try:
-        # Test with Origin
+
         async with websockets.connect(
             "ws://localhost:8000/ws/room",
             extra_headers={"Origin": "http://localhost:5173"}
@@ -12,9 +12,9 @@ async def test():
             await ws.close()
     except Exception as e:
         print(f"Error 1: {e}")
-        
+
     try:
-        # Test with Origin
+
         async with websockets.connect(
             "ws://127.0.0.1:8000/ws/room",
             extra_headers={"Origin": "http://127.0.0.1:5173"}

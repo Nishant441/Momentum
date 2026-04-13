@@ -39,12 +39,12 @@ export function Home({ token, user, onLogout }: HomeProps) {
     scheduleNotifications,
   } = useNotifications()
 
-  // ── Persistent assignment list ────────────────────────────────────────────
+
   const [assignments, setAssignments] = useState<Assignment[]>(() => loadAssignments())
   const [serverLoaded, setServerLoaded] = useState(false)
   const syncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // On mount: fetch from server, replacing localStorage snapshot
+
   useEffect(() => {
     fetchAssignments(token)
       .then((serverAssignments) => {
@@ -52,12 +52,12 @@ export function Home({ token, user, onLogout }: HomeProps) {
         saveAssignments(serverAssignments)
       })
       .catch(() => {
-        // Server unreachable — fall back to localStorage, still allow use
+
       })
       .finally(() => setServerLoaded(true))
   }, [token])
 
-  // Sync to server (debounced 1s) + localStorage whenever assignments change
+
   useEffect(() => {
     if (!serverLoaded) return
     saveAssignments(assignments)
@@ -67,22 +67,22 @@ export function Home({ token, user, onLogout }: HomeProps) {
     }, 1000)
   }, [assignments, serverLoaded, token])
 
-  // ── Smart notifications ───────────────────────────────────────────────────
+
   useEffect(() => {
     scheduleNotifications(assignments, room.sprinters)
   }, [assignments, room.sprinters, scheduleNotifications])
 
-  // ── Navigation state ──────────────────────────────────────────────────────
+
   const [activeAssignmentId, setActiveAssignmentId] = useState<string | null>(null)
   const [focusTask, setFocusTask] = useState<Task | null>(null)
   const [showVictory, setShowVictory] = useState(false)
 
-  // ── Modal / API key ───────────────────────────────────────────────────────
+
   const [showModal, setShowModal] = useState(false)
   const [apiKey, setApiKey] = useState(() => localStorage.getItem('momentum_api_key') ?? '')
   const [showKeyInput, setShowKeyInput] = useState(false)
 
-  // ── Derived ───────────────────────────────────────────────────────────────
+
   const activeAssignment = activeAssignmentId
     ? assignments.find((a) => a.id === activeAssignmentId) ?? null
     : null
@@ -91,7 +91,7 @@ export function Home({ token, user, onLogout }: HomeProps) {
   const globalCompleted = assignments.reduce((sum, a) => sum + a.completedIds.length, 0)
   const showNotifPrompt = assignments.length > 0 && permissionState === 'pending'
 
-  // ── Handlers ─────────────────────────────────────────────────────────────
+
 
   const handleAssignmentCreated = (assignment: Assignment) => {
     setAssignments((prev) => [assignment, ...prev])
@@ -137,7 +137,7 @@ export function Home({ token, user, onLogout }: HomeProps) {
     setShowKeyInput(false)
   }
 
-  // ── Victory screen ────────────────────────────────────────────────────────
+
   if (showVictory && activeAssignment) {
     return (
       <VictoryScreen
@@ -147,7 +147,7 @@ export function Home({ token, user, onLogout }: HomeProps) {
     )
   }
 
-  // ── Focus mode ────────────────────────────────────────────────────────────
+
   if (focusTask && activeAssignment) {
     return (
       <FocusMode
@@ -161,7 +161,7 @@ export function Home({ token, user, onLogout }: HomeProps) {
     )
   }
 
-  // ── Shared header actions ─────────────────────────────────────────────────
+
   const headerRight = (
     <div className="flex items-center gap-2">
       <SettingsMenu
@@ -194,7 +194,7 @@ export function Home({ token, user, onLogout }: HomeProps) {
     </div>
   )
 
-  // ── Task list for a single assignment ─────────────────────────────────────
+
   if (activeAssignment) {
     return (
       <div className="min-h-svh flex flex-col items-center bg-app-bg">
@@ -254,7 +254,7 @@ export function Home({ token, user, onLogout }: HomeProps) {
     )
   }
 
-  // ── Dashboard ─────────────────────────────────────────────────────────────
+
   return (
     <div className="min-h-svh flex flex-col items-center bg-app-bg">
       <header className="w-full max-w-2xl px-4 pt-12 pb-2 flex items-center justify-between">
@@ -325,7 +325,7 @@ export function Home({ token, user, onLogout }: HomeProps) {
   )
 }
 
-// ── Inline API key form ───────────────────────────────────────────────────────
+
 
 function ApiKeyForm({
   currentKey,

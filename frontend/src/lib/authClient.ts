@@ -2,7 +2,7 @@ import type { Assignment } from './api'
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
 
-// ── Types ─────────────────────────────────────────────────────────────────────
+
 
 export interface AuthUser {
   id: string
@@ -19,7 +19,7 @@ export interface StreakPayload {
   sprintsDate: string
 }
 
-// ── Auth endpoints ────────────────────────────────────────────────────────────
+
 
 async function post<T>(path: string, body: unknown, token?: string): Promise<T> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' }
@@ -64,7 +64,7 @@ async function put(path: string, body: unknown, token: string): Promise<void> {
   }
 }
 
-// ── Public API ────────────────────────────────────────────────────────────────
+
 
 export async function apiRegister(
   email: string,
@@ -84,7 +84,7 @@ export async function apiMe(token: string): Promise<AuthUser> {
   return get('/auth/me', token)
 }
 
-// ── Data sync ─────────────────────────────────────────────────────────────────
+
 
 export async function fetchAssignments(token: string): Promise<Assignment[]> {
   const data = await get<{ assignments: Assignment[] }>('/data/assignments', token)

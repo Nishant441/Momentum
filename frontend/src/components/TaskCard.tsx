@@ -52,14 +52,14 @@ export function TaskCard({ task, isHighestRisk, isCompleted, onStartNow }: TaskC
 
   return (
     <div className="group flex gap-4 rounded-2xl border border-border bg-card-bg p-5 transition-all hover:border-border-strong hover:bg-raised">
-      {/* Step number */}
+      {}
       <div className="flex-shrink-0 flex items-start pt-0.5">
         <span className="flex h-7 w-7 items-center justify-center rounded-full border border-border text-xs font-medium text-text-secondary">
           {task.order}
         </span>
       </div>
 
-      {/* Content */}
+      {}
       <div className="flex-1 min-w-0">
         <h3 className="font-display font-bold text-text-primary text-lg leading-snug mb-1">
           {task.title}
@@ -67,7 +67,7 @@ export function TaskCard({ task, isHighestRisk, isCompleted, onStartNow }: TaskC
         <p className="text-sm text-text-secondary leading-relaxed">
           {task.description}
         </p>
-        {/* Risk badge row */}
+        {}
         <div className="flex items-center gap-2 mt-2">
           <span className={`flex items-center gap-1.5 text-xs font-medium ${risk.color}`}>
             <span className={`h-1.5 w-1.5 rounded-full ${risk.dot}`} />
@@ -80,7 +80,7 @@ export function TaskCard({ task, isHighestRisk, isCompleted, onStartNow }: TaskC
           )}
         </div>
 
-        {/* Start Now CTA — only on primary task */}
+        {}
         {onStartNow && (
           <button
             onClick={onStartNow}
@@ -91,7 +91,7 @@ export function TaskCard({ task, isHighestRisk, isCompleted, onStartNow }: TaskC
         )}
       </div>
 
-      {/* Time badge */}
+      {}
       <div className="flex-shrink-0 flex items-start pt-0.5">
         <span className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${badge}`}>
           <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />

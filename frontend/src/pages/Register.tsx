@@ -32,7 +32,7 @@ export function Register({ onRegister, onGoLogin, error, loading }: RegisterProp
   return (
     <div className="min-h-svh flex flex-col items-center justify-center bg-app-bg px-4">
       <div className="w-full max-w-sm flex flex-col gap-8">
-        {/* Brand */}
+        {}
         <div className="text-center">
           <h1 className="font-display font-bold text-5xl text-text-primary tracking-normal leading-none">
             Momentum
@@ -40,7 +40,7 @@ export function Register({ onRegister, onGoLogin, error, loading }: RegisterProp
           <p className="text-sm text-text-secondary mt-2">Your assignments. Your streak. Everywhere.</p>
         </div>
 
-        {/* Form */}
+        {}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs text-text-secondary font-medium uppercase tracking-wide">

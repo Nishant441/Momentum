@@ -20,14 +20,14 @@ export function useAuth(): AuthState {
   const [authError, setAuthError] = useState('')
   const [authLoading, setAuthLoading] = useState(false)
 
-  // On first load with a stored token, validate it
+
   useState(() => {
     const stored = localStorage.getItem(TOKEN_KEY)
     if (!stored) return
     apiMe(stored)
       .then((u) => setUser(u))
       .catch(() => {
-        // Token expired or invalid — clear it
+
         localStorage.removeItem(TOKEN_KEY)
         setToken(null)
       })

@@ -9,7 +9,7 @@ from routes.auth import get_current_user
 
 router = APIRouter(prefix="/data", tags=["data"])
 
-# ── Schemas ───────────────────────────────────────────────────────────────────
+
 
 class AssignmentsBody(BaseModel):
     assignments: list[Any]
@@ -17,7 +17,7 @@ class AssignmentsBody(BaseModel):
 class StreakBody(BaseModel):
     streak: dict[str, Any]
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
+
 
 def _get_or_create_data(db: Session, user_id: str) -> UserData:
     data = db.query(UserData).filter(UserData.user_id == user_id).first()
@@ -28,7 +28,7 @@ def _get_or_create_data(db: Session, user_id: str) -> UserData:
         db.refresh(data)
     return data
 
-# ── Assignments ───────────────────────────────────────────────────────────────
+
 
 @router.get("/assignments")
 def get_assignments(
@@ -50,7 +50,7 @@ def put_assignments(
     db.commit()
     return {"ok": True}
 
-# ── Streak ────────────────────────────────────────────────────────────────────
+
 
 @router.get("/streak")
 def get_streak(

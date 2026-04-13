@@ -70,7 +70,7 @@ export function UrgencyDashboard({ assignments, onOpen, onDelete }: UrgencyDashb
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Active buckets */}
+      {}
       {activeBuckets.map((b) => {
         const cards = byBucket(b.id)
         return (
@@ -91,7 +91,7 @@ export function UrgencyDashboard({ assignments, onOpen, onDelete }: UrgencyDashb
         )
       })}
 
-      {/* If nothing active, show placeholder for active sections */}
+      {}
       {activeBuckets.length === 0 && doneBucket.length > 0 && (
         <div className="text-center py-8">
           <p className="font-display font-bold text-2xl text-text-primary">Everything\u2019s done!</p>
@@ -99,7 +99,7 @@ export function UrgencyDashboard({ assignments, onOpen, onDelete }: UrgencyDashb
         </div>
       )}
 
-      {/* Done section — collapsed/subtle */}
+      {}
       {doneBucket.length > 0 && (
         <section>
           <div className="flex items-center gap-2 mb-3">

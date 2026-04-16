@@ -1,6 +1,6 @@
 # Momentum
 
-> **Overall Champion + Best Practicality** — Cal State LA Hackathon 2026
+> **Overall Champion + Best Practicality** - Cal State LA Hackathon 2026
 
 An AI-powered anti-procrastination web app that transforms overwhelming assignments into immediate, actionable micro-tasks. Built for students who know what’s due, but struggle to start.
 

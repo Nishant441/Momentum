@@ -341,14 +341,14 @@ function ApiKeyForm({
   return (
     <div className="rounded-2xl border border-border bg-card-bg p-4 flex flex-col gap-3">
       <p className="text-xs text-text-secondary">
-        Your Anthropic API key \u2014 stored locally in your browser, never sent anywhere except directly to Anthropic.
+        Your Groq API key — stored locally in your browser, never sent anywhere except directly to Groq.
       </p>
       <div className="flex gap-2">
         <input
           type="password"
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder="sk-ant-..."
+          placeholder="gsk-..."
           className="flex-1 rounded-xl border border-border bg-app-bg px-3 py-2 text-sm text-text-primary placeholder-text-muted outline-none focus:border-action"
         />
         <button

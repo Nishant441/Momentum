@@ -6,8 +6,9 @@ An AI-powered anti-procrastination web app that transforms overwhelming assignme
 
 ---
 
-<!-- Replace with your GIF once uploaded -->
-<!-- ![Momentum Demo](./demo.gif) -->
+
+
+
 
 ---
 

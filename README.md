@@ -5,10 +5,7 @@
 An AI-powered anti-procrastination web app that transforms overwhelming assignments into immediate, actionable micro-tasks. Built for students who know what’s due, but struggle to start.
 
 ---
-
-
-
-
+<img width="540" height="295" alt="momentum_video (1)" src="https://github.com/user-attachments/assets/0c4f3ec0-ac7c-447e-bc32-b42ca5a64580" />
 
 ---
 
